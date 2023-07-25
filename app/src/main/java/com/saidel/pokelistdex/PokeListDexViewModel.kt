@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.saidel.pokelistdex.api.PkmListAPI
 import com.saidel.pokelistdex.api.RetrofitConfig
 import com.saidel.pokelistdex.models.PkmDetails
-import com.saidel.pokelistdex.models.PkmList
+import com.saidel.pokelistdex.models.PokedexDetails
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,14 +21,14 @@ class PokeListDexViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     fun loadPokeDex() {
-        val pkmListCall: Call<PkmList?>? = apiService.getPkmList()
-        pkmListCall?.enqueue(object : Callback<PkmList?> {
-            override fun onResponse(call: Call<PkmList?>?, response: Response<PkmList?>?) {
-                var pkmList: PkmList? = response?.body()
-                state.value = PokeListDexStates.Success(pkmList)
+        val pokedexDetailsCall: Call<PokedexDetails?>? = apiService.getPkmList()
+        pokedexDetailsCall?.enqueue(object : Callback<PokedexDetails?> {
+            override fun onResponse(call: Call<PokedexDetails?>?, response: Response<PokedexDetails?>?) {
+                var pokedexDetails: PokedexDetails? = response?.body()
+                state.value = PokeListDexStates.Success(pokedexDetails)
             }
 
-            override fun onFailure(call: Call<PkmList?>?, t: Throwable?) {
+            override fun onFailure(call: Call<PokedexDetails?>?, t: Throwable?) {
                 state.value = PokeListDexStates.Error(t.toString())
             }
         })

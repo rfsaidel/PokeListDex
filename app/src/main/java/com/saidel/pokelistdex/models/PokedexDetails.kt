@@ -4,7 +4,7 @@ import androidx.annotation.DrawableRes
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-class PkmList {
+class PokedexDetails {
     var count: String? = null
     var next: String? = null
     var previous: String? = null

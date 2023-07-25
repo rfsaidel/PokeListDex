@@ -6,18 +6,23 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import com.saidel.pokelistdex.iu.screens.PokeListDexScreen
+import com.saidel.pokelistdex.models.Pkm
 import com.saidel.pokelistdex.models.PkmDetails
-import com.saidel.pokelistdex.models.PkmList
+import com.saidel.pokelistdex.models.PokedexDetails
 
 class PokeListDex : ComponentActivity() {
 
     private val pokeListDexViewModel: PokeListDexViewModel by viewModels()
-    private var pkmList: PkmList? = null
+    private var pokedexDetails: PokedexDetails? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            PokeListDexScreen()
+            PokeListDexScreen(
+                arrayOf(
+                    Pkm().set("Pikachu"), Pkm().set("Chamander"), Pkm().set("Bulbasaur")
+                )
+            )
         }
         loadObserver()
         //loadData()
@@ -44,9 +49,9 @@ class PokeListDex : ComponentActivity() {
 
     private fun updateList(state: PokeListDexStates.Success) {
         when (state.successMsg) {
-            is PkmList -> {
-                pkmList = state.successMsg
-                Log.i("rfsaidel", "success > state ${pkmList?.count}")
+            is PokedexDetails -> {
+                pokedexDetails = state.successMsg
+                Log.i("rfsaidel", "success > state ${pokedexDetails?.count}")
             }
 
             is PkmDetails -> {
