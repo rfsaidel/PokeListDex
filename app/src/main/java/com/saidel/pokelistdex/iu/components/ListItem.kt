@@ -32,12 +32,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.saidel.pokelistdex.R
 import com.saidel.pokelistdex.models.Pkm
+import com.saidel.pokelistdex.utils.Constants.Companion.IMG_BASE_URL_SMALL
 
 
 @Composable
 fun Item(pkm: Pkm) {
+    var name = pkm.name
+    var number = pkm.getNumber()
     Surface(
         shape = RoundedCornerShape(5.dp), shadowElevation = 5.dp, modifier = Modifier.height(70.dp)
     ) {
@@ -70,19 +74,20 @@ fun Item(pkm: Pkm) {
                             color = Color(0xFFEB6C1D), radius = canvasHeight
                         )
                     }
-                    Image(
+                    AsyncImage(
                         contentDescription = null,
                         modifier = Modifier
                             .size(60.dp)
                             .clip(CircleShape),
-                        painter = painterResource(id = R.drawable.id_pkm_front_default),
+                        model = IMG_BASE_URL_SMALL.plus(number).plus(".png"),
+                        placeholder = painterResource(id = R.drawable.id_pkm_front_default)
                     )
                 }
                 Spacer(modifier = Modifier.width(20.dp))
                 Column {
-                    Text(pkm.name!!, fontSize = 20.sp)
+                    Text(name!!, fontSize = 20.sp)
                     Spacer(modifier = Modifier.height(1.dp))
-                    Text("#${1.toString().padStart(4,'0')}")
+                    Text("#${number!!.padStart(4,'0')}")
                 }
             }
             Canvas(modifier = Modifier.fillMaxSize()) {

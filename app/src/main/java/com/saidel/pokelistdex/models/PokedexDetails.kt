@@ -14,12 +14,16 @@ class PokedexDetails {
 @JsonIgnoreProperties(ignoreUnknown = true)
 class Pkm {
     var name: String? = null
-    var url: String? = null
+    var url: String? = "https://pokeapi.co/api/v2/pokemon/123/"
     @DrawableRes
     var img: Int = 0
 
     fun set(name: String): Pkm {
         this.name = name
         return this
+    }
+
+    fun getNumber(): String? {
+        return this.url!!.split('/').dropLast(1).last()
     }
 }

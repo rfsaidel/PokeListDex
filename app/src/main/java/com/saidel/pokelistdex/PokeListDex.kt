@@ -22,10 +22,11 @@ class PokeListDex : ComponentActivity() {
                 arrayOf(
                     Pkm().set("Pikachu"), Pkm().set("Chamander"), Pkm().set("Bulbasaur")
                 )
+                //pokedexDetails?.results
             )
         }
         loadObserver()
-        //loadData()
+        loadData()
     }
 
     private fun loadData() {
