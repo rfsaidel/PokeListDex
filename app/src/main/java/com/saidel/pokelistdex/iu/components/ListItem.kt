@@ -38,12 +38,6 @@ import androidx.compose.ui.unit.sp
 import com.saidel.pokelistdex.R
 import com.saidel.pokelistdex.models.Pkm
 
-@Preview
-@Composable
-private fun ItemPreview() {
-    Item(Pkm().set("Pikachu"))
-}
-
 @Composable
 fun Item(pkmData: Pkm) {
     Surface(
@@ -107,4 +101,10 @@ fun Item(pkmData: Pkm) {
             Text(LoremIpsum(10).values.first())
         }
     }
+}
+
+@Preview
+@Composable
+private fun ItemPreview() {
+    Item(Pkm().set("Pikachu"))
 }
