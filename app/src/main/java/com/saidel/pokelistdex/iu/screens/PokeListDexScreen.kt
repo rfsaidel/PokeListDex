@@ -13,11 +13,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.saidel.pokelistdex.iu.components.Item
+import com.saidel.pokelistdex.iu.components.SearchField
 import com.saidel.pokelistdex.iu.components.Title
 import com.saidel.pokelistdex.models.Pkm
 
 @Composable
 fun PokeListDexScreen(pkmList: Array<Pkm>?) {
+
     Surface(Modifier.background(Color.White)) {
         LazyColumn(
             modifier = Modifier
@@ -27,6 +29,9 @@ fun PokeListDexScreen(pkmList: Array<Pkm>?) {
             verticalArrangement = Arrangement.spacedBy(15.dp),
             contentPadding = PaddingValues(vertical = 10.dp)
         ) {
+            item {
+                SearchField()
+            }
             item {
                 Title()
             }
