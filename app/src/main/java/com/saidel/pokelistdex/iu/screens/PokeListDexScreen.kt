@@ -30,8 +30,8 @@ fun PokeListDexScreen(pkmList: Array<Pkm>?) {
             item {
                 Title()
             }
-            items(pkmList!!.size) { pkm ->
-                Item(pkmList.get(pkm))
+            items(pkmList!!.size) { pkmIndex ->
+                Item(pkmList.get(pkmIndex))
             }
         }
     }
