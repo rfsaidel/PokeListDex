@@ -1,7 +1,6 @@
 package com.saidel.pokelistdex.iu.models
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import com.fasterxml.jackson.annotation.JsonIncludeProperties
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 class PkmDetails {
