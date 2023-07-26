@@ -1,4 +1,4 @@
-package com.saidel.pokelistdex.models
+package com.saidel.pokelistdex.iu.models
 
 import androidx.annotation.DrawableRes
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties

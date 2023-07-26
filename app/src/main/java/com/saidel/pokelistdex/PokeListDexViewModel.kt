@@ -5,8 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.saidel.pokelistdex.api.PkmListAPI
 import com.saidel.pokelistdex.api.RetrofitConfig
-import com.saidel.pokelistdex.models.PkmDetails
-import com.saidel.pokelistdex.models.PokedexDetails
+import com.saidel.pokelistdex.iu.models.PkmDetails
+import com.saidel.pokelistdex.iu.models.PokedexDetails
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

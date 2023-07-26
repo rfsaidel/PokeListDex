@@ -34,7 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.saidel.pokelistdex.R
-import com.saidel.pokelistdex.models.Pkm
+import com.saidel.pokelistdex.iu.models.Pkm
 import com.saidel.pokelistdex.utils.Constants.Companion.IMG_BASE_URL_SMALL
 
 

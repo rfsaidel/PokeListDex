@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.AlertDialogDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -15,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.saidel.pokelistdex.iu.components.Item
 import com.saidel.pokelistdex.iu.components.SearchField
 import com.saidel.pokelistdex.iu.components.Title
-import com.saidel.pokelistdex.models.Pkm
+import com.saidel.pokelistdex.iu.models.Pkm
 
 @Composable
 fun PokeListDexScreen(pkmList: Array<Pkm>?) {
@@ -27,13 +28,13 @@ fun PokeListDexScreen(pkmList: Array<Pkm>?) {
                 .padding(start = 10.dp, end = 10.dp)
                 .fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(15.dp),
-            contentPadding = PaddingValues(vertical = 10.dp)
+            contentPadding = PaddingValues(vertical = 8.dp)
         ) {
             item {
-                SearchField()
+                Title()
             }
             item {
-                Title()
+                SearchField()
             }
             items(pkmList!!.size) { pkmIndex ->
                 Item(pkmList.get(pkmIndex))

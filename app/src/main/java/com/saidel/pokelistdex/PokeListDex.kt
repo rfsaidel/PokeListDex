@@ -6,9 +6,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import com.saidel.pokelistdex.iu.screens.PokeListDexScreen
-import com.saidel.pokelistdex.models.Pkm
-import com.saidel.pokelistdex.models.PkmDetails
-import com.saidel.pokelistdex.models.PokedexDetails
+import com.saidel.pokelistdex.iu.models.Pkm
+import com.saidel.pokelistdex.iu.models.PkmDetails
+import com.saidel.pokelistdex.iu.models.PokedexDetails
 
 class PokeListDex : ComponentActivity() {
 
