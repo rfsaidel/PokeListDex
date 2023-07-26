@@ -1,5 +1,6 @@
 package com.saidel.pokelistdex.iu.components
 
+import android.app.Application
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -21,9 +22,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.saidel.pokelistdex.PokeListDexViewModel
 
 @Composable
-fun SearchField() {
+fun SearchField(pokeListDexViewModel: PokeListDexViewModel) {
     Column {
         var text by remember { mutableStateOf("") }
         OutlinedTextField(modifier = Modifier
@@ -36,8 +38,7 @@ fun SearchField() {
             ),
             shape = RoundedCornerShape(50),
             textStyle = TextStyle(
-                color = Color(0xFFDF5702),
-                fontSize = 16.sp
+                color = Color(0xFFDF5702), fontSize = 16.sp
             ),
             placeholder = {
                 Text("Qual Pokémon você procura?", color = Color(0xFFDF5702))
@@ -55,6 +56,7 @@ fun SearchField() {
             value = text,
             onValueChange = { newValue ->
                 text = newValue
+                pokeListDexViewModel.setSearch(text)
             })
     }
 }
@@ -62,5 +64,5 @@ fun SearchField() {
 @Preview
 @Composable
 fun SearchFieldPreview() {
-    SearchField()
+    SearchField(PokeListDexViewModel(Application()))
 }

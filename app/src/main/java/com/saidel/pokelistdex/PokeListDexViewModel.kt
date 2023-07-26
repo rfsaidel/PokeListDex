@@ -14,6 +14,7 @@ import retrofit2.Response
 class PokeListDexViewModel(application: Application) : AndroidViewModel(application) {
 
     val state = MutableLiveData<PokeListDexStates>()
+    val composeState = MutableLiveData<PokeListDexComposeStates>()
     lateinit var apiService: PkmListAPI
 
     fun initApi() {
@@ -23,7 +24,9 @@ class PokeListDexViewModel(application: Application) : AndroidViewModel(applicat
     fun loadPokeDex() {
         val pokedexDetailsCall: Call<PokedexDetails?>? = apiService.getPkmList()
         pokedexDetailsCall?.enqueue(object : Callback<PokedexDetails?> {
-            override fun onResponse(call: Call<PokedexDetails?>?, response: Response<PokedexDetails?>?) {
+            override fun onResponse(
+                call: Call<PokedexDetails?>?, response: Response<PokedexDetails?>?
+            ) {
                 var pokedexDetails: PokedexDetails? = response?.body()
                 state.value = PokeListDexStates.Success(pokedexDetails)
             }
@@ -46,5 +49,9 @@ class PokeListDexViewModel(application: Application) : AndroidViewModel(applicat
                 state.value = PokeListDexStates.Error(t.toString())
             }
         })
+    }
+
+    fun setSearch(value: String) {
+        composeState.value = PokeListDexComposeStates.Search(value)
     }
 }

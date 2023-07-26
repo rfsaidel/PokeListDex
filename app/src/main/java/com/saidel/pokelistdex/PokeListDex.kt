@@ -5,10 +5,10 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import com.saidel.pokelistdex.iu.screens.PokeListDexScreen
 import com.saidel.pokelistdex.iu.models.Pkm
 import com.saidel.pokelistdex.iu.models.PkmDetails
 import com.saidel.pokelistdex.iu.models.PokedexDetails
+import com.saidel.pokelistdex.iu.screens.PokeListDexScreen
 
 class PokeListDex : ComponentActivity() {
 
@@ -21,8 +21,7 @@ class PokeListDex : ComponentActivity() {
             PokeListDexScreen(
                 arrayOf(
                     Pkm().set("Pikachu"), Pkm().set("Chamander"), Pkm().set("Bulbasaur")
-                )
-                //pokedexDetails?.results
+                ), pokeListDexViewModel, this
             )
         }
         loadObserver()
