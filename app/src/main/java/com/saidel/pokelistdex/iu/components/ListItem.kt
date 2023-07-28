@@ -1,5 +1,6 @@
 package com.saidel.pokelistdex.iu.components
 
+import android.util.Log
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
@@ -73,6 +74,7 @@ fun Item(pkm: Pkm) {
                             color = Color(0xFFEB6C1D), radius = canvasHeight
                         )
                     }
+                    Log.i("rfsaidel","url: ${IMG_BASE_URL_SMALL.plus(number).plus(".png")}")
                     AsyncImage(
                         contentDescription = null,
                         modifier = Modifier

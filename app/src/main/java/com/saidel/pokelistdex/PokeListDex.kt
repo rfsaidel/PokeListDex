@@ -19,9 +19,10 @@ class PokeListDex : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             PokeListDexScreen(
-                arrayOf(
-                    Pkm().set("Pikachu"), Pkm().set("Chamander"), Pkm().set("Bulbasaur")
-                ), pokeListDexViewModel, this
+//                arrayOf(
+//                    Pkm().set("Pikachu"), Pkm().set("Chamander"), Pkm().set("Bulbasaur")
+//                )
+                pokeListDexViewModel, this
             )
         }
         loadObserver()
