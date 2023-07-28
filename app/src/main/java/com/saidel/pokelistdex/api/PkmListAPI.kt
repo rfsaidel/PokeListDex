@@ -7,7 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface PkmListAPI {
-    @GET("pokemon")
+    @GET("pokemon/?offset=0&limit=151&")
     fun getPkmList(): Call<PokedexDetails?>?
 
     @GET("pokemon/{id}/")

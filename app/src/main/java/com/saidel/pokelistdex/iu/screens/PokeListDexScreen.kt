@@ -1,6 +1,5 @@
 package com.saidel.pokelistdex.iu.screens
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -11,6 +10,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,6 +31,8 @@ fun PokeListDexScreen(
 ) {
 
     Surface(Modifier.background(Color.White)) {
+        var pkmList by remember { mutableStateOf<Array<Pkm>>(arrayOf()) }
+        var filteredPkmList by remember { mutableStateOf<List<Pkm>>(listOf()) }
         LazyColumn(
             modifier = Modifier
                 .background(Color(0xFFFFB265))
@@ -46,41 +48,36 @@ fun PokeListDexScreen(
                 SearchField(pokeListDexViewModel)
             }
 
-            var pkmList by mutableStateOf<Array<Pkm>?>(arrayOf())
             pokeListDexViewModel.state.observe(owner!!) {
                 when (it) {
                     is PokeListDexStates.Success -> {
                         when (it.successMsg) {
                             is PokedexDetails -> {
-                                pkmList = it.successMsg.results
-                                for (pkm in pkmList!!) {
-                                    Log.i("rfsaidel", "FORRRR")
-                                    item {
-                                        Item(pkm)
-                                    }
-                                }
+                                pkmList = it.successMsg.results!!
+                                filteredPkmList = pkmList.toList()
                             }
                         }
                     }
+
                     is PokeListDexStates.Error -> null
                 }
             }
 
-            var searchText by mutableStateOf("")
+            items(filteredPkmList.size) { pkmIndex ->
+                Item(filteredPkmList.get((pkmIndex)))
+            }
+
             owner.let {
                 pokeListDexViewModel.composeState.observe(it) {
                     when (it) {
                         is PokeListDexComposeStates.Search -> {
-                            searchText = it.value
+                            filteredPkmList = pkmList.filter { pkm ->
+                                pkm.name!!.contains(it.value, ignoreCase = true) ||
+                                        pkm.getNumber()!!.contains(it.value, ignoreCase = true)
+                            }
                         }
                     }
                 }
-            }
-
-            if (searchText.isBlank()) {
-                Log.i("rfsaidel", "not blank")
-            } else {
-                Log.i("rfsaidel", "blank")
             }
         }
     }
