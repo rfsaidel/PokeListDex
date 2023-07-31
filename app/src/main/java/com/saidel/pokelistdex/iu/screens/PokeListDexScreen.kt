@@ -16,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LifecycleOwner
-import com.saidel.pokelistdex.PokeListDexComposeStates
 import com.saidel.pokelistdex.PokeListDexStates
 import com.saidel.pokelistdex.PokeListDexViewModel
 import com.saidel.pokelistdex.iu.components.Item
@@ -45,7 +44,18 @@ fun PokeListDexScreen(
                 Title()
             }
             item {
-                SearchField(pokeListDexViewModel)
+                var searchText by remember { mutableStateOf("") }
+                SearchField(
+                    searchText,
+                    onSearchChange = { newSearchValue ->
+                        searchText = newSearchValue
+
+                        filteredPkmList = pkmList.filter { pkm ->
+                            pkm.name!!.contains(newSearchValue, ignoreCase = true) ||
+                                    pkm.getNumber()!!.contains(newSearchValue, ignoreCase = true)
+                        }
+                    },
+                )
             }
 
             pokeListDexViewModel.state.observe(owner!!) {
@@ -67,18 +77,13 @@ fun PokeListDexScreen(
                 Item(filteredPkmList.get((pkmIndex)))
             }
 
-            owner.let {
-                pokeListDexViewModel.composeState.observe(it) {
-                    when (it) {
-                        is PokeListDexComposeStates.Search -> {
-                            filteredPkmList = pkmList.filter { pkm ->
-                                pkm.name!!.contains(it.value, ignoreCase = true) ||
-                                        pkm.getNumber()!!.contains(it.value, ignoreCase = true)
-                            }
-                        }
-                    }
-                }
-            }
+            // FOR TESTING
+//            var pkm = Pkm().set("testestes")
+//            for (i in 1..151) {
+//                item {
+//                    Item(pkm)
+//                }
+//            }
         }
     }
 }

@@ -25,9 +25,9 @@ import androidx.compose.ui.unit.sp
 import com.saidel.pokelistdex.PokeListDexViewModel
 
 @Composable
-fun SearchField(pokeListDexViewModel: PokeListDexViewModel) {
+fun SearchField(searchText: String, onSearchChange: (String) -> Unit) {
     Column {
-        var text by remember { mutableStateOf("") }
+
         OutlinedTextField(modifier = Modifier
             .fillMaxWidth()
             .height(65.dp),
@@ -53,10 +53,9 @@ fun SearchField(pokeListDexViewModel: PokeListDexViewModel) {
             label = {
                 Text("Buscar", color = Color(0xFFDF5702))
             },
-            value = text,
+            value = searchText,
             onValueChange = { newValue ->
-                text = newValue
-                pokeListDexViewModel.setSearch(text)
+                onSearchChange(newValue)
             })
     }
 }
@@ -64,5 +63,5 @@ fun SearchField(pokeListDexViewModel: PokeListDexViewModel) {
 @Preview
 @Composable
 fun SearchFieldPreview() {
-    SearchField(PokeListDexViewModel(Application()))
+    SearchField("", onSearchChange = {})
 }
