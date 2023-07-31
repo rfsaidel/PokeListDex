@@ -80,7 +80,7 @@ fun Item(pkm: Pkm) {
                             .size(60.dp)
                             .clip(CircleShape),
                         model = IMG_BASE_URL_SMALL.plus(number).plus(".png"),
-                        placeholder = painterResource(id = R.drawable.id_pkm_front_default)
+                        placeholder = painterResource(id = R.drawable.pokebola_3d)
                     )
                 }
                 Spacer(modifier = Modifier.width(20.dp))
