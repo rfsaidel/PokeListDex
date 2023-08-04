@@ -1,4 +1,4 @@
-package com.saidel.pokelistdex
+package com.saidel.pokelistdex.iu.activities.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

@@ -16,8 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LifecycleOwner
-import com.saidel.pokelistdex.PokeListDexStates
-import com.saidel.pokelistdex.PokeListDexViewModel
+import com.saidel.pokelistdex.iu.activities.main.PokeListDexStates
+import com.saidel.pokelistdex.iu.activities.main.PokeListDexViewModel
 import com.saidel.pokelistdex.iu.components.Item
 import com.saidel.pokelistdex.iu.components.SearchField
 import com.saidel.pokelistdex.iu.components.Title
