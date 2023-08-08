@@ -4,10 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.material3.MaterialTheme
 import com.saidel.pokelistdex.iu.models.PokedexDetails
 import com.saidel.pokelistdex.iu.screens.PokeListDexScreen
 
-class PokeListDex : ComponentActivity() {
+class PokeListDexActivity : ComponentActivity() {
 
     private val pokeListDexViewModel: PokeListDexViewModel by viewModels()
     private var pokedexDetails: PokedexDetails? = null
@@ -15,9 +16,11 @@ class PokeListDex : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            PokeListDexScreen(
-                pokeListDexViewModel, this
-            )
+            MaterialTheme {
+                PokeListDexScreen(
+                    pokeListDexViewModel, this
+                )
+            }
         }
 //        loadObserver()
         loadData()

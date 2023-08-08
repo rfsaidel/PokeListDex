@@ -15,6 +15,7 @@ class PokeListDexViewModel(application: Application) : AndroidViewModel(applicat
 
     val state = MutableLiveData<PokeListDexStates>()
     lateinit var apiService: PkmListAPI
+    private var pokedexDetails: PokedexDetails? = null
 
     fun initApi() {
         apiService = RetrofitConfig().getPkmListAPIService()!!
