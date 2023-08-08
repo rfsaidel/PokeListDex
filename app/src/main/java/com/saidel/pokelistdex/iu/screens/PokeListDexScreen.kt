@@ -49,7 +49,6 @@ fun PokeListDexScreen(
                     searchText,
                     onSearchChange = { newSearchValue ->
                         searchText = newSearchValue
-
                         filteredPkmList = pkmList.filter { pkm ->
                             pkm.name!!.contains(newSearchValue, ignoreCase = true) ||
                                     pkm.getNumber()!!.contains(newSearchValue, ignoreCase = true)
@@ -76,14 +75,6 @@ fun PokeListDexScreen(
             items(filteredPkmList.size) { pkmIndex ->
                 Item(filteredPkmList.get((pkmIndex)))
             }
-
-            // FOR TESTING
-//            var pkm = Pkm().set("testestes")
-//            for (i in 1..151) {
-//                item {
-//                    Item(pkm)
-//                }
-//            }
         }
     }
 }
