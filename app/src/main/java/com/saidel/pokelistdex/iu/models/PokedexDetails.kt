@@ -1,6 +1,5 @@
 package com.saidel.pokelistdex.iu.models
 
-import androidx.annotation.DrawableRes
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -15,8 +14,6 @@ class PokedexDetails {
 class Pkm {
     var name: String? = null
     var url: String? = "https://pokeapi.co/api/v2/pokemon/123/"
-    @DrawableRes
-    var img: Int = 0
 
     fun set(name: String): Pkm {
         this.name = name

@@ -14,24 +14,21 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.LifecycleOwner
-import com.saidel.pokelistdex.iu.activities.main.PokeListDexStates
-import com.saidel.pokelistdex.iu.activities.main.PokeListDexViewModel
 import com.saidel.pokelistdex.iu.components.Item
 import com.saidel.pokelistdex.iu.components.SearchField
 import com.saidel.pokelistdex.iu.components.Title
 import com.saidel.pokelistdex.iu.models.Pkm
-import com.saidel.pokelistdex.iu.models.PokedexDetails
 
 @Composable
 fun PokeListDexScreen(
-    pokeListDexViewModel: PokeListDexViewModel, owner: LifecycleOwner?
+    pkmList: MutableList<Pkm>
 ) {
 
     Surface(Modifier.background(Color.White)) {
-        var pkmList by remember { mutableStateOf<Array<Pkm>>(arrayOf()) }
         var filteredPkmList by remember { mutableStateOf<List<Pkm>>(listOf()) }
+        filteredPkmList = pkmList
         LazyColumn(
             modifier = Modifier
                 .background(Color(0xFFFFB265))
@@ -50,26 +47,13 @@ fun PokeListDexScreen(
                     onSearchChange = { newSearchValue ->
                         searchText = newSearchValue
                         filteredPkmList = pkmList.filter { pkm ->
-                            pkm.name!!.contains(newSearchValue, ignoreCase = true) ||
-                                    pkm.getNumber()!!.contains(newSearchValue, ignoreCase = true)
+                            pkm.name!!.contains(
+                                newSearchValue,
+                                ignoreCase = true
+                            ) || pkm.getNumber()!!.contains(newSearchValue, ignoreCase = true)
                         }
                     },
                 )
-            }
-
-            pokeListDexViewModel.state.observe(owner!!) {
-                when (it) {
-                    is PokeListDexStates.Success -> {
-                        when (it.successMsg) {
-                            is PokedexDetails -> {
-                                pkmList = it.successMsg.results!!
-                                filteredPkmList = pkmList.toList()
-                            }
-                        }
-                    }
-
-                    is PokeListDexStates.Error -> null
-                }
             }
 
             items(filteredPkmList.size) { pkmIndex ->
@@ -79,12 +63,12 @@ fun PokeListDexScreen(
     }
 }
 
-//@Preview(showSystemUi = true)
-//@Composable
-//fun PokeListDexScreenPreview() {
-//    PokeListDexScreen(
-//        arrayOf(
-//            Pkm().set("Pikachu"), Pkm().set("Chamander"), Pkm().set("Bulbasaur")
-//        ), PokeListDexViewModel(Application()), null
-//    )
-//}
+@Preview(showSystemUi = true)
+@Composable
+fun PokeListDexScreenPreview() {
+    PokeListDexScreen(
+        listOf(
+            Pkm().set("Pikachu"), Pkm().set("Chamander"), Pkm().set("Bulbasaur")
+        ).toMutableList()
+    )
+}
