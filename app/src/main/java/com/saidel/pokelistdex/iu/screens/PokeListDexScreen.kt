@@ -21,10 +21,17 @@ import com.saidel.pokelistdex.iu.components.SearchField
 import com.saidel.pokelistdex.iu.components.Title
 import com.saidel.pokelistdex.iu.models.Pkm
 
-class PokeListDexScreenIuState(var pkmList: MutableList<Pkm>) {
-    var filteredPkmList by mutableStateOf<List<Pkm>>(listOf())
+class PokeListDexScreenIuState {
 
-    fun searchPkm(newSearchValue: String){
+    var filteredPkmList by mutableStateOf<List<Pkm>>(listOf())
+    var pkmList by mutableStateOf<List<Pkm>>(listOf())
+
+    constructor(pkmList: MutableList<Pkm>) {
+        filteredPkmList = pkmList
+        this.pkmList = pkmList
+    }
+
+    fun searchPkm(newSearchValue: String) {
         filteredPkmList = pkmList.filter { pkm ->
             pkm.name!!.contains(
                 newSearchValue, ignoreCase = true
@@ -32,7 +39,7 @@ class PokeListDexScreenIuState(var pkmList: MutableList<Pkm>) {
         }
     }
 
-    var onSearchChange: (String) -> Unit = {searchText ->
+    var onSearchChange: (String) -> Unit = { searchText ->
         searchPkm(searchText)
     }
 }
@@ -42,7 +49,6 @@ fun PokeListDexScreen(
     state: PokeListDexScreenIuState
 ) {
     Surface(Modifier.background(Color.White)) {
-        state.filteredPkmList = state.pkmList
         LazyColumn(
             modifier = Modifier
                 .background(Color(0xFFFFB265))
