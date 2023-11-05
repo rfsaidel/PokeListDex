@@ -21,14 +21,28 @@ import com.saidel.pokelistdex.iu.components.SearchField
 import com.saidel.pokelistdex.iu.components.Title
 import com.saidel.pokelistdex.iu.models.Pkm
 
+class PokeListDexScreenIuState(var pkmList: MutableList<Pkm>) {
+    var filteredPkmList by mutableStateOf<List<Pkm>>(listOf())
+
+    fun searchPkm(newSearchValue: String){
+        filteredPkmList = pkmList.filter { pkm ->
+            pkm.name!!.contains(
+                newSearchValue, ignoreCase = true
+            ) || pkm.getNumber()!!.contains(newSearchValue, ignoreCase = true)
+        }
+    }
+
+    var onSearchChange: (String) -> Unit = {searchText ->
+        searchPkm(searchText)
+    }
+}
+
 @Composable
 fun PokeListDexScreen(
-    pkmList: MutableList<Pkm>
+    state: PokeListDexScreenIuState
 ) {
-
     Surface(Modifier.background(Color.White)) {
-        var filteredPkmList by remember { mutableStateOf<List<Pkm>>(listOf()) }
-        filteredPkmList = pkmList
+        state.filteredPkmList = state.pkmList
         LazyColumn(
             modifier = Modifier
                 .background(Color(0xFFFFB265))
@@ -46,18 +60,13 @@ fun PokeListDexScreen(
                     searchText,
                     onSearchChange = { newSearchValue ->
                         searchText = newSearchValue
-                        filteredPkmList = pkmList.filter { pkm ->
-                            pkm.name!!.contains(
-                                newSearchValue,
-                                ignoreCase = true
-                            ) || pkm.getNumber()!!.contains(newSearchValue, ignoreCase = true)
-                        }
+                        state.onSearchChange(newSearchValue)
                     },
                 )
             }
 
-            items(filteredPkmList.size) { pkmIndex ->
-                Item(filteredPkmList.get((pkmIndex)))
+            items(state.filteredPkmList.size) { pkmIndex ->
+                Item(state.filteredPkmList.get((pkmIndex)))
             }
         }
     }
@@ -67,8 +76,10 @@ fun PokeListDexScreen(
 @Composable
 fun PokeListDexScreenPreview() {
     PokeListDexScreen(
-        listOf(
-            Pkm().set("Pikachu"), Pkm().set("Chamander"), Pkm().set("Bulbasaur")
-        ).toMutableList()
+        state = PokeListDexScreenIuState(
+            pkmList = listOf(
+                Pkm().set("Pikachu"), Pkm().set("Chamander"), Pkm().set("Bulbasaur")
+            ).toMutableList()
+        )
     )
 }

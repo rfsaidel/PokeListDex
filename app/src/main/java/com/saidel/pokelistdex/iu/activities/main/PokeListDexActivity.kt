@@ -17,6 +17,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Modifier
 import com.saidel.pokelistdex.iu.models.Pkm
 import com.saidel.pokelistdex.iu.screens.PokeListDexScreen
+import com.saidel.pokelistdex.iu.screens.PokeListDexScreenIuState
 
 class PokeListDexActivity : ComponentActivity() {
 
@@ -33,8 +34,9 @@ class PokeListDexActivity : ComponentActivity() {
                     }
                 }) { paddingValues ->
                     Box(modifier = Modifier.padding(paddingValues)) {
+                        var state = PokeListDexScreenIuState(pkmList)
                         PokeListDexScreen(
-                            pkmList
+                            state
                         )
                     }
                 }
